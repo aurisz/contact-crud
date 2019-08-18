@@ -9,9 +9,10 @@
 
 .card {
   background: #fff;
-  border-radius: 5px;
-  padding: 15px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   margin-bottom: 20px;
 }
 
@@ -66,4 +67,41 @@
 
 .contact-card .button-danger {
   margin-left: 10px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 20px;
+}
+
+.image-container {
+  width: 100%;
+  position: relative;
+  background-color: #08ffc8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-container img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.card-button-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+.text-light {
+  font-weight: 300;
+}
+
+hr {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }

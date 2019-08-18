@@ -39,9 +39,19 @@ const ContactForm = ({ toggleModal, submitContact, form, setForm }) => {
         onChange={onChange}
         max={100}
       />
+      <label>Photo</label>
+      <input
+        name="photo"
+        className="u-full-width"
+        type="text"
+        placeholder="Enter Photo URL"
+        value={form.photo}
+        onChange={onChange}
+      />
 
       <hr />
-      <div className="row contact-form-footer">
+
+      <div className="contact-form-footer">
         <button
           type="button"
           aria-label="close-form"

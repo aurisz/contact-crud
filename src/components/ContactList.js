@@ -13,34 +13,48 @@ const ContactList = ({
   }
 
   return (
-    <div id="contactList">
+    <div id="contactList" className="grid">
       {contactList.map(contact => (
-        <div key={contact.id} className="card contact-card">
-          <div className="row">
-            <h5 className="contact-info" aria-label="contact-info">
-              {contact.firstName} {contact.lastName} (Age: {contact.age})
-            </h5>
-          </div>
-          <div className="row">
-            <button
-              type="button"
-              aria-label="edit-contact"
-              className="button-success"
-              onClick={() => {
-                viewContact(contact.id);
-                toggleModal();
+        <div key={contact.id}>
+          <div className="image-container">
+            <img
+              src={contact.photo}
+              alt={contact.firstName}
+              onError={e => {
+                e.target.src =
+                  'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png';
               }}
-            >
-              Edit
-            </button>
-            <button
-              type="button"
-              aria-label="delete-contact"
-              className="button-danger"
-              onClick={() => deleteContact(contact.id)}
-            >
-              Delete
-            </button>
+            />
+          </div>
+          <div className="card contact-card">
+            <h5 className="contact-info" aria-label="contact-info">
+              {contact.firstName} {contact.lastName},{' '}
+              <span className="text-light">{contact.age}</span>
+            </h5>
+
+            <hr className="card-divider" />
+
+            <div className="card-button-group">
+              <button
+                type="button"
+                aria-label="edit-contact"
+                className="button-success"
+                onClick={() => {
+                  viewContact(contact.id);
+                  toggleModal();
+                }}
+              >
+                Edit
+              </button>
+              <button
+                type="button"
+                aria-label="delete-contact"
+                className="button-danger"
+                onClick={() => deleteContact(contact.id)}
+              >
+                Delete
+              </button>
+            </div>
           </div>
         </div>
       ))}
