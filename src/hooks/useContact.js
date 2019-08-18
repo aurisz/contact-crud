@@ -74,7 +74,7 @@ const useContact = () => {
           data,
         });
 
-        setFetch(true);
+        setFetch(!fetch);
         sendMessage(response.data.message);
         setIsError(false);
       }
@@ -102,7 +102,7 @@ const useContact = () => {
     try {
       const response = await axios.delete(`${url}/${contactId}`);
 
-      setFetch(true);
+      setFetch(!fetch);
       sendMessage(response.data.message);
       setIsError(false);
     } catch (error) {

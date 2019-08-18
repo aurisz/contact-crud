@@ -9,7 +9,7 @@ const ContactForm = ({ toggleModal, submitContact, form, setForm }) => {
 
   return (
     <div id="contactForm">
-      <h4>Contact Form</h4>
+      <h4 className="text-center">Contact Form</h4>
       <div className="form-image-preview">
         <img
           src={form.photo}

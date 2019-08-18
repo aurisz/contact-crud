@@ -24,13 +24,15 @@
 .modal-wrapper {
   position: fixed;
   z-index: 1;
-  padding-top: 100px;
-  left: 0;
-  top: 0;
   width: 100%;
   height: 100%;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.4);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
 }
 
 .modal-body {
@@ -102,6 +104,10 @@
 
 .text-light {
   font-weight: 300;
+}
+
+.text-center {
+  text-align: center;
 }
 
 hr {
