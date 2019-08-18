@@ -1,8 +1,8 @@
-.container {
+.app-container {
   position: relative;
   width: 100%;
   max-width: 960px;
-  margin: 0 auto;
+  margin: 30px auto;
   padding: 0 20px;
   box-sizing: border-box;
 }
@@ -53,4 +53,16 @@
   top: 20px;
   color: #fff;
   padding: 15px;
+}
+
+.contact-form-footer {
+  text-align: right;
+}
+
+.contact-form-footer .button-primary {
+  margin-left: 10px;
+}
+
+.contact-card .button-danger {
+  margin-left: 10px;
 }

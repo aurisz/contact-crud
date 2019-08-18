@@ -20,14 +20,16 @@ const App = () => {
     viewContact,
     message,
     isError,
+    isLoading,
   } = useContact();
   const [open, setOpen] = useToggle(false);
 
   return (
-    <div className="container">
-      <h1>Contacts</h1>
+    <div className="app-container">
+      <h1>CRUD Contact App</h1>
       <button
         type="button"
+        className="button-primary"
         onClick={() => {
           setOpen();
           setForm(defaultForm);
@@ -35,18 +37,21 @@ const App = () => {
       >
         Add Contact
       </button>
+
       <hr />
+
       <ContactList
         contactList={contactList}
         deleteContact={deleteContact}
         viewContact={viewContact}
         toggleModal={setOpen}
+        isLoading={isLoading}
       />
 
       {open && (
         <Modal open={open} toggle={setOpen}>
           <ContactForm
-            toggle={setOpen}
+            toggleModal={setOpen}
             submitContact={submitContact}
             form={form}
             setForm={setForm}

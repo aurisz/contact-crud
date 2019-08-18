@@ -8,8 +8,7 @@ export const defaultForm = {
   firstName: '',
   lastName: '',
   age: 0,
-  photo:
-    'http://vignette1.wikia.nocookie.net/lotr/images/6/68/Bilbo_baggins.jpg/revision/latest?cb=20130202022550',
+  photo: 'N/A',
 };
 
 const useContact = () => {
@@ -20,16 +19,6 @@ const useContact = () => {
   const [message, setMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await axios.get(url);
-
-      setContactList(response.data.data);
-    };
-
-    fetchData();
-  }, [fetch]);
-
   const sendMessage = (msg = '') => {
     setMessage(msg);
 
@@ -37,6 +26,25 @@ const useContact = () => {
       setMessage('');
     }, 2000);
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+
+      try {
+        const response = await axios.get(url);
+        setContactList(response.data.data);
+        setIsError(false);
+      } catch (error) {
+        setIsError(true);
+        sendMessage(error.response.data.message);
+      }
+
+      setIsLoading(false);
+    };
+
+    fetchData();
+  }, [fetch]);
 
   const submitContact = useCallback(async contactForm => {
     try {
@@ -47,12 +55,12 @@ const useContact = () => {
         ...contactForm,
       };
 
-      if (data.id === null) {
-        delete data.id;
-      } else {
-        submitUrl = `${url}/${data.id}`;
+      if (data.id !== null) {
+        submitUrl = `${url}/${contactForm.id}`;
         method = 'PUT';
       }
+
+      delete data.id;
 
       const response = await axios({
         method,
@@ -70,6 +78,8 @@ const useContact = () => {
   }, []);
 
   const viewContact = useCallback(async contactId => {
+    setForm(defaultForm);
+
     try {
       const response = await axios.get(`${url}/${contactId}`);
 
@@ -103,6 +113,7 @@ const useContact = () => {
     deleteContact,
     viewContact,
     isError,
+    isLoading,
     message,
   };
 };
