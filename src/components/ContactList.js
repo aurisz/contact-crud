@@ -18,6 +18,7 @@ const ContactList = ({
         <div key={contact.id}>
           <div className="image-container">
             <img
+              className="card-image"
               src={contact.photo}
               alt={contact.firstName}
               onError={e => {

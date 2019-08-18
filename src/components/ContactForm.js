@@ -10,6 +10,17 @@ const ContactForm = ({ toggleModal, submitContact, form, setForm }) => {
   return (
     <div id="contactForm">
       <h4>Contact Form</h4>
+      <div className="form-image-preview">
+        <img
+          src={form.photo}
+          alt=""
+          onError={e => {
+            e.target.src =
+              'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png';
+          }}
+        />
+      </div>
+      <br />
       <label>First Name</label>
       <input
         name="firstName"
