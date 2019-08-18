@@ -10,7 +10,7 @@ const Toast = ({ message, isError }) => (
           backgroundColor: isError ? '#dd2000' : '#129a7d',
         }}
       >
-        <span>{message}</span>
+        {message}
       </div>
     )}
   </>

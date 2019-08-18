@@ -16,26 +16,32 @@ const ContactList = ({
     <div id="contactList">
       {contactList.map(contact => (
         <div key={contact.id} className="card contact-card">
-          <h5>
-            {contact.firstName} {contact.lastName} (Age: {contact.age})
-          </h5>
-          <button
-            type="button"
-            className="button-success"
-            onClick={() => {
-              viewContact(contact.id);
-              toggleModal();
-            }}
-          >
-            Edit
-          </button>
-          <button
-            type="button"
-            className="button-danger"
-            onClick={() => deleteContact(contact.id)}
-          >
-            Delete
-          </button>
+          <div className="row">
+            <h5 className="contact-detail">
+              {contact.firstName} {contact.lastName} (Age: {contact.age})
+            </h5>
+          </div>
+          <div className="row">
+            <button
+              type="button"
+              aria-label="edit-contact"
+              className="button-success"
+              onClick={() => {
+                viewContact(contact.id);
+                toggleModal();
+              }}
+            >
+              Edit
+            </button>
+            <button
+              type="button"
+              aria-label="delete-contact"
+              className="button-danger"
+              onClick={() => deleteContact(contact.id)}
+            >
+              Delete
+            </button>
+          </div>
         </div>
       ))}
     </div>

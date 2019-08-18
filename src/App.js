@@ -5,6 +5,7 @@ import './styles/app.css';
 import useContact, { defaultForm } from './hooks/useContact';
 import useToggle from './hooks/useToggle';
 
+import ContactAdd from './components/ContactAdd';
 import ContactList from './components/ContactList';
 import Modal from './components/Modal';
 import ContactForm from './components/ContactForm';
@@ -24,19 +25,16 @@ const App = () => {
   } = useContact();
   const [open, setOpen] = useToggle(false);
 
+  const addContact = () => {
+    setForm(defaultForm);
+    setOpen();
+  };
+
   return (
     <div className="app-container">
       <h1>CRUD Contact App</h1>
-      <button
-        type="button"
-        className="button-primary"
-        onClick={() => {
-          setForm(defaultForm);
-          setOpen();
-        }}
-      >
-        Add Contact
-      </button>
+
+      <ContactAdd addContact={addContact} />
 
       <hr />
 

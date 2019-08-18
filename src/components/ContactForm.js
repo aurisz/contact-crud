@@ -18,6 +18,7 @@ const ContactForm = ({ toggleModal, submitContact, form, setForm }) => {
         placeholder="Enter First Name"
         value={form.firstName}
         onChange={onChange}
+        aria-label="first-name"
       />
       <label>Last Name</label>
       <input
@@ -43,6 +44,7 @@ const ContactForm = ({ toggleModal, submitContact, form, setForm }) => {
       <div className="row contact-form-footer">
         <button
           type="button"
+          aria-label="close-form"
           onClick={() => {
             toggleModal();
           }}
@@ -51,6 +53,7 @@ const ContactForm = ({ toggleModal, submitContact, form, setForm }) => {
         </button>
         <button
           type="button"
+          aria-label="submit-form"
           className="button-primary"
           onClick={() => {
             submitContact(form);
