@@ -1,26 +1,62 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+import './styles/app.css';
+
+import useContact, { defaultForm } from './hooks/useContact';
+import useToggle from './hooks/useToggle';
+
+import ContactList from './components/ContactList';
+import Modal from './components/Modal';
+import ContactForm from './components/ContactForm';
+import Toast from './components/Toast';
+
+const App = () => {
+  const {
+    contactList,
+    submitContact,
+    form,
+    setForm,
+    deleteContact,
+    viewContact,
+    message,
+    isError,
+  } = useContact();
+  const [open, setOpen] = useToggle(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <h1>Contacts</h1>
+      <button
+        type="button"
+        onClick={() => {
+          setOpen();
+          setForm(defaultForm);
+        }}
+      >
+        Add Contact
+      </button>
+      <hr />
+      <ContactList
+        contactList={contactList}
+        deleteContact={deleteContact}
+        viewContact={viewContact}
+        toggleModal={setOpen}
+      />
+
+      {open && (
+        <Modal open={open} toggle={setOpen}>
+          <ContactForm
+            toggle={setOpen}
+            submitContact={submitContact}
+            form={form}
+            setForm={setForm}
+          />
+        </Modal>
+      )}
+
+      <Toast message={message} isError={isError} />
     </div>
   );
-}
+};
 
 export default App;
