@@ -53,6 +53,7 @@
   top: 20px;
   color: #fff;
   padding: 15px;
+  z-index: 1000;
 }
 
 .contact-form-footer {

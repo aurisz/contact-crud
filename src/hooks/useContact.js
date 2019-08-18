@@ -64,15 +64,20 @@ const useContact = () => {
 
       delete data.id;
 
-      const response = await axios({
-        method,
-        url: submitUrl,
-        data,
-      });
+      if (data.firstName === '') {
+        setIsError(true);
+        sendMessage('First Name must be filled!');
+      } else {
+        const response = await axios({
+          method,
+          url: submitUrl,
+          data,
+        });
 
-      setFetch(true);
-      sendMessage(response.data.message);
-      setIsError(false);
+        setFetch(true);
+        sendMessage(response.data.message);
+        setIsError(false);
+      }
     } catch (error) {
       setIsError(true);
       sendMessage(error.response.data.message);
