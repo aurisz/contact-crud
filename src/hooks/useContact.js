@@ -22,6 +22,7 @@ const useContact = () => {
   const sendMessage = (msg = '') => {
     setMessage(msg);
 
+    // remove message after timeout
     window.setTimeout(() => {
       setMessage('');
     }, 2000);
@@ -55,6 +56,7 @@ const useContact = () => {
         ...contactForm,
       };
 
+      // if data id is not null it means updating existing contact
       if (data.id !== null) {
         submitUrl = `${url}/${contactForm.id}`;
         method = 'PUT';

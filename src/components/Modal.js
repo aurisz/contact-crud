@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
+import PropTypes from 'prop-types';
 
 // Creates a portal outside the DOM hierarchy
-function Portal({ children }) {
-  const modalRoot = document.getElementById('modal'); // A div with id=modal-root in the index.html
+const Portal = ({ children }) => {
+  const modalRoot = document.getElementById('modal'); // A div with id=modal in the index.html
   const [element] = useState(document.createElement('div')); // Create a div element which will be mounted within modal-root
 
-  // useEffect bible: https://overreacted.io/a-complete-guide-to-useeffect/
   useEffect(() => {
     modalRoot.appendChild(element);
 
@@ -17,24 +17,25 @@ function Portal({ children }) {
   }, [modalRoot, element]);
 
   return createPortal(children, element);
-}
+};
 
 // A modal component which will be used by other components / pages
-function Modal({ children, toggle, open }) {
-  return (
-    <Portal>
-      {open && (
-        <div className="modal-wrapper" onClick={toggle}>
-          <div
-            className="modal-body"
-            onClick={event => event.stopPropagation()}
-          >
-            {children}
-          </div>
+const Modal = ({ children, toggle, open }) => (
+  <Portal>
+    {open && (
+      <div className="modal-wrapper" onClick={toggle}>
+        <div className="modal-body" onClick={event => event.stopPropagation()}>
+          {children}
         </div>
-      )}
-    </Portal>
-  );
-}
+      </div>
+    )}
+  </Portal>
+);
+
+Modal.propTypes = {
+  toggle: PropTypes.func.isRequired,
+  open: PropTypes.bool.isRequired,
+  children: PropTypes.element.isRequired,
+};
 
 export default Modal;

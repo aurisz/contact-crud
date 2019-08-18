@@ -1,20 +1,29 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const Toast = ({ message, isError }) => {
-  return (
-    <>
-      {message === '' ? null : (
-        <div
-          className="toast"
-          style={{
-            backgroundColor: isError ? '#dd2000' : 'green',
-          }}
-        >
-          <span>{message}</span>
-        </div>
-      )}
-    </>
-  );
+const Toast = ({ message, isError }) => (
+  <>
+    {message === '' ? null : (
+      <div
+        className="toast"
+        style={{
+          backgroundColor: isError ? '#dd2000' : '#129a7d',
+        }}
+      >
+        <span>{message}</span>
+      </div>
+    )}
+  </>
+);
+
+Toast.propTypes = {
+  message: PropTypes.string,
+  isError: PropTypes.bool,
+};
+
+Toast.defaultProps = {
+  message: '',
+  isError: false,
 };
 
 export default Toast;

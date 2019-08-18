@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const ContactForm = ({ toggleModal, submitContact, form, setForm }) => {
   const onChange = e => {
@@ -61,6 +62,19 @@ const ContactForm = ({ toggleModal, submitContact, form, setForm }) => {
       </div>
     </div>
   );
+};
+
+ContactForm.propTypes = {
+  toggleModal: PropTypes.func.isRequired,
+  submitContact: PropTypes.func.isRequired,
+  form: PropTypes.shape({
+    id: PropTypes.string,
+    firstName: PropTypes.string,
+    lastName: PropTypes.string,
+    age: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    photo: PropTypes.string,
+  }).isRequired,
+  setForm: PropTypes.func.isRequired,
 };
 
 export default ContactForm;

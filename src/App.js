@@ -31,8 +31,8 @@ const App = () => {
         type="button"
         className="button-primary"
         onClick={() => {
-          setOpen();
           setForm(defaultForm);
+          setOpen();
         }}
       >
         Add Contact
