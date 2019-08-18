@@ -37,7 +37,7 @@ describe('Contact List', () => {
 
   it('should render list correctly', () => {
     const wrapper = shallow(component);
-    expect(wrapper.find('.contact-detail').text()).toBe(
+    expect(wrapper.find('.contact-info').text()).toBe(
       'Luke Skywalker (Age: 29)',
     );
   });

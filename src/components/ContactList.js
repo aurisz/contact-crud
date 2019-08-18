@@ -17,7 +17,7 @@ const ContactList = ({
       {contactList.map(contact => (
         <div key={contact.id} className="card contact-card">
           <div className="row">
-            <h5 className="contact-detail">
+            <h5 className="contact-info" aria-label="contact-info">
               {contact.firstName} {contact.lastName} (Age: {contact.age})
             </h5>
           </div>
