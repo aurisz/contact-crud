@@ -47,42 +47,45 @@ const useContact = () => {
     fetchData();
   }, [fetch]);
 
-  const submitContact = useCallback(async contactForm => {
-    try {
-      let submitUrl = url;
-      let method = 'POST';
+  const submitContact = useCallback(
+    async contactForm => {
+      try {
+        let submitUrl = url;
+        let method = 'POST';
 
-      const data = {
-        ...contactForm,
-      };
+        const data = {
+          ...contactForm,
+        };
 
-      // if data id is not null it means updating existing contact
-      if (data.id !== null) {
-        submitUrl = `${url}/${contactForm.id}`;
-        method = 'PUT';
-      }
+        // if data id is not null it means updating existing contact
+        if (data.id !== null) {
+          submitUrl = `${url}/${contactForm.id}`;
+          method = 'PUT';
+        }
 
-      delete data.id;
+        delete data.id;
 
-      if (data.firstName === '') {
+        if (data.firstName === '') {
+          setIsError(true);
+          sendMessage('First Name must be filled!');
+        } else {
+          const response = await axios({
+            method,
+            url: submitUrl,
+            data,
+          });
+
+          setFetch(!fetch);
+          sendMessage(response.data.message);
+          setIsError(false);
+        }
+      } catch (error) {
         setIsError(true);
-        sendMessage('First Name must be filled!');
-      } else {
-        const response = await axios({
-          method,
-          url: submitUrl,
-          data,
-        });
-
-        setFetch(!fetch);
-        sendMessage(response.data.message);
-        setIsError(false);
+        sendMessage(error.response.data.message);
       }
-    } catch (error) {
-      setIsError(true);
-      sendMessage(error.response.data.message);
-    }
-  }, []);
+    },
+    [fetch],
+  );
 
   const viewContact = useCallback(async contactId => {
     setForm(defaultForm);
@@ -98,18 +101,21 @@ const useContact = () => {
     }
   }, []);
 
-  const deleteContact = useCallback(async contactId => {
-    try {
-      const response = await axios.delete(`${url}/${contactId}`);
+  const deleteContact = useCallback(
+    async contactId => {
+      try {
+        const response = await axios.delete(`${url}/${contactId}`);
 
-      setFetch(!fetch);
-      sendMessage(response.data.message);
-      setIsError(false);
-    } catch (error) {
-      setIsError(true);
-      sendMessage(error.response.data.message);
-    }
-  }, []);
+        setFetch(!fetch);
+        sendMessage(response.data.message);
+        setIsError(false);
+      } catch (error) {
+        setIsError(true);
+        sendMessage(error.response.data.message);
+      }
+    },
+    [fetch],
+  );
 
   return {
     contactList,
